@@ -18,6 +18,7 @@ class CommandLine(user_interface.UI):
         not_valid = True
         while not_valid:
             try:
+                print(f"P{board.player()}'s ({self.symbol[board.player()]}) turn!")
                 move = input("where would you like to move?")
                 if len(move) != 1:
                     raise ValueError
@@ -27,7 +28,7 @@ class CommandLine(user_interface.UI):
 
     def add_score(self, winner):
         if winner in [1, 2]:
-            player = self.symbol[winner]
+            player = f"P{winner} ({self.symbol[winner]})"
         else:
             player = "Nobody"
 

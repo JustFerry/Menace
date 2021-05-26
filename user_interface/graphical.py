@@ -63,6 +63,12 @@ class Graphical(user_interface.UI):
         pygame.draw.line(self.screen, black, (0, line1), (width, line1), self.line_width)
         pygame.draw.line(self.screen, black, (0, line2), (width, line2), self.line_width)
 
+    def draw_player(self, board, y_index=120):
+        player_text = self.font.render(f"P{board.player()}\'s turn", True, black)
+        width, height = pygame.display.get_surface().get_size()
+        text_rect = player_text.get_rect(center=(width / 2, height - y_index))
+        self.screen.blit(player_text, text_rect)
+
     def render(self, board):
         self.draw_board()
 
@@ -77,8 +83,9 @@ class Graphical(user_interface.UI):
                     if value == 2:
                         self.draw_o(row, col)
 
-        self.draw_score("wins %d/%d" % (self.score[0], sum(self.score)), 110)
-        self.draw_score("(draws %d, losses %d)" % (self.score[2], self.score[1]), 40)
+        self.draw_score("wins %d/%d" % (self.score[0], sum(self.score)), 70)
+        self.draw_score("(draws %d, losses %d)" % (self.score[2], self.score[1]), 30)
+        self.draw_player(board)
 
         # Update the screen
         pygame.display.update()
