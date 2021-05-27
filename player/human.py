@@ -19,3 +19,5 @@ class Human(player.Player):
             if move in self.keys:
                 coordinate = self.keys[move]
                 return coordinate
+            if isinstance(move, tuple):
+                return move

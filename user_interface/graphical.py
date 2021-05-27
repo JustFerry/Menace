@@ -104,9 +104,17 @@ class Graphical(user_interface.UI):
                 event.post(event)
             elif event.type == pygame.locals.KEYUP:
                 return event.key
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                return self.coordinate_to_position(pygame.mouse.get_pos())
         return None
 
     def add_score(self, winner):
         self.score[winner - 1] += 1
         if sum(self.score) > 500:
             self.score = [0, 0, 0]
+
+    def coordinate_to_position(self, mouse_position):
+        y = mouse_position[0] // self.side_width
+        x = mouse_position[1] // self.side_width
+        if 0 <=x < 3 and 0 <= y < 3:
+            return x, y
